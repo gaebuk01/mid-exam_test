@@ -13,7 +13,8 @@
   --text-color: #2c3e50;
   --border-color: #F0F0F0;
   --shadow-color: rgba(90, 90, 120, 0.08);
-  --text-color-grey: #757575;
+  /* ✨ 2. 미선택 답변 글자색 연하게 */
+  --text-color-grey: #AAAAAA; /* #757575에서 변경 */
 
   --background-pink-start: #FFE4EC;
   --background-pink-end: #FFB6C1;
@@ -32,15 +33,15 @@ body {
 .container { max-width: 1150px; margin: 0 auto; padding: 55px; }
 
 header {
-  text-align: center; margin-bottom: 30px; animation: slideUp 0.6s ease-out forwards;
+  text-align: center; margin-bottom: 65px; animation: slideUp 0.6s ease-out forwards;
   color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-header h1 { margin-bottom: 20px; font-size: 4.2rem; color: var(--primary-color); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
-header p { font-size: 1.15rem; opacity: 0.9; margin-bottom: 50px; color: #FFFFFF; }
+header h1 { margin-bottom: 21px; font-size: 4.3rem; color: var(--primary-color); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); }
+header p { font-size: 1.15rem; opacity: 0.9; margin-bottom: 50px; color: var(--primary-color); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);}
 
 #record-form, .stats-section, .records-section {
   background-color: var(--card-background); backdrop-filter: blur(10px);
-  padding: 45px; border-radius: 16px; box-shadow: 0 8px 32px 0 var(--shadow-color);
+  padding: 50px; border-radius: 16px; box-shadow: 0 8px 32px 0 var(--shadow-color);
   margin-bottom: 40px; border: 1px solid rgba(255, 255, 255, 0.2);
   opacity: 0; animation: slideUp 0.7s ease-out forwards;
 }
@@ -49,7 +50,14 @@ header p { font-size: 1.15rem; opacity: 0.9; margin-bottom: 50px; color: #FFFFFF
 
 .form-group { margin-bottom: 30px; padding-bottom: 30px; border-bottom: none; }
 #record-form .form-group:last-of-type { border-bottom: none; padding-bottom: 0; }
-.form-group label { display: block; margin-bottom: 27px; font-weight: 400; font-size: 1.1rem; }
+
+/* ✨ 1. 질문 글자 크기/굵기 수정 */
+.form-group label { 
+  display: block; 
+  margin-bottom: 27px; 
+  font-weight: 700; /* 400에서 변경 */
+  font-size: 1.15rem; /* 1.1rem에서 변경 */
+}
 
 input[type="date"], select, textarea, input[type="text"] {
   width: 100%; padding: 12px; border: 1.5px solid var(--border-color); border-radius: 8px;
@@ -64,7 +72,8 @@ textarea { resize: vertical; }
 .choice-selector label {
   padding: 12px 20px; border: 2px solid var(--border-color); border-radius: 20px;
   cursor: pointer; background-color: #FFFFFF; transition: all 0.2s ease-in-out;
-  font-weight: 400; color: var(--text-color-grey);
+  font-weight: 400; 
+  color: var(--text-color-grey); /* ✨ 2. 여기에 연한 회색이 적용됩니다 */
 }
 .choice-selector label:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-color: var(--primary-color); }
 .choice-selector input[type="radio"]:checked + label,
@@ -137,11 +146,25 @@ button[type="submit"]:hover { background-color: #D85594; transform: translateY(-
   border-bottom: 2px solid var(--primary-color); border-radius: 16px 16px 0 0;
 }
 
-.records-header, .record-row { display: grid; grid-template-columns: 100px 1fr 1.5fr 1fr 100px;gap: 15px; padding: 15px 20px; align-items: center; border-bottom: 1px solid var(--border-color); }
+/* --- ✨ 3. CSS (1) - 표 너비 수정 --- */
+.records-header, .record-row { 
+    display: grid; 
+    grid-template-columns: 100px 1fr 1.5fr 1.5fr 100px;
+    gap: 15px; 
+    padding: 15px 20px; 
+    align-items: center;  /* <<< 텍스트가 길어질 때를 대비해 'center'로 유지 */
+    border-bottom: 1px solid var(--border-color); 
+}
 .record-row:last-child { border-bottom: none; }
 .record-row:hover { background-color: #F7F9FC; }
 .record-nickname { font-weight: 700; }
-.record-style, .record-reason, .record-factor { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* --- ✨ 3. CSS (2) - 텍스트 전체 보이게 수정 --- */
+.record-channel, .record-reason, .record-expectation {
+    white-space: normal; /* 줄바꿈 허용 */
+    line-height: 1.4;
+    /* 2줄 제한 코드 모두 제거 */
+}
 .record-date { font-size: 0.9rem; color: #777; text-align: center; }
 
 footer { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 0.9rem; color: #FFFFFF; opacity: 0.8; }
@@ -162,11 +185,20 @@ footer { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 0.9
   .records-list-container { background-color: transparent; box-shadow: none; border: none; }
   .record-row { grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.18); box-shadow: 0 4px 15px var(--shadow-color); background-color: var(--card-background); padding: 20px; }
   .record-row > div { text-align: left; }
+  
+  /* --- ✨ 3. CSS (3) - 모바일 뷰 수정 --- */
   .record-row > div::before { font-weight: 700; margin-right: 10px; color: var(--primary-color); display: inline-block; width: 90px; }
-  .record-nickname::before { content: '닉네임:'; } .record-style::before { content: '선호 스타일:'; } .record-reason::before { content: '구매 이유:'; } .record-factor::before { content: '고려 요소:'; } .record-date::before { content: '날짜:'; }
-  .record-reason, .record-style, .record-factor { white-space: normal; overflow: visible; text-overflow: initial; }
-    /* 모바일 제목 스타일 조정 */
-    .section-header-inside { margin-bottom: 15px; } /* 테이블과의 간격 살짝 줄임 */
-    /* 모바일 하단 버튼 스타일 */
-    .export-button-bottom { margin-bottom: 30px; font-size: 0.9rem;} /* 모바일 하단 여백 및 폰트 조정 */
+  .record-nickname::before { content: '닉네임:'; } 
+  .record-channel::before { content: '이용 채널:'; } 
+  .record-reason::before { content: '구매 이유:'; } 
+  .record-expectation::before { content: '기대하는 점:'; } 
+  .record-date::before { content: '날짜:'; }
+  
+  /* 모바일에선 이미 텍스트가 다 보이도록 설정되어 있습니다 (변경 없음) */
+  .record-channel, .record-reason, .record-expectation { white-space: normal; overflow: visible; text-overflow: initial; }
+  
+  /* 모바일 제목 스타일 조정 */
+  .section-header-inside { margin-bottom: 15px; } /* 테이블과의 간격 살짝 줄임 */
+  /* 모바일 하단 버튼 스타일 */
+  .export-button-bottom { margin-bottom: 30px; font-size: 0.9rem;} /* 모바일 하단 여백 및 폰트 조정 */
 }
